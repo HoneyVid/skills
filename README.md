@@ -1,29 +1,42 @@
 # HoneyVid agent skills
 
-Teach Claude Code, Codex, and other agents to make HoneyVid videos and images through connected MCP tools or the `npx honeyvid` CLI.
+Teach Claude Code, Codex and other agents to make HoneyVid videos and images: put anyone in a trending video from one photo, or generate with Kling, Veo, Seedance, Nano Banana and more. The skills work through the HoneyVid MCP tools (`https://honeyvid.ai/mcp`) or the [`honeyvid` CLI](https://github.com/HoneyVid/cli).
 
-Install the bundled skills:
+## Install
+
+**Claude Code plugin** (skills plus the HoneyVid MCP server):
+
+```text
+/plugin marketplace add HoneyVid/skills
+/plugin install honeyvid@honeyvid
+```
+
+**Any agent**, with the [skills](https://skills.sh) CLI:
+
+```sh
+npx skills add HoneyVid/skills
+```
+
+**With the HoneyVid CLI** (copies them into `~/.claude/skills` and/or `~/.codex/skills`):
 
 ```sh
 npx honeyvid skills install
-npx honeyvid skills install --agent claude
 npx honeyvid skills install --agent codex
-npx honeyvid skills install --agent all --dir ./my-skills
 npx honeyvid skills list
 ```
 
-The installer copies owned skill files into `~/.claude/skills/<name>/` and/or `~/.codex/skills/<name>/` and prints the paths. Use `--dir` for a custom destination. It overwrites only files it owns.
+Then connect your account: add `https://honeyvid.ai/mcp` to your agent, or run `npx honeyvid login`. Setup for every app: https://honeyvid.ai/mcp
 
-Or install from this repository with the [skills](https://skills.sh) CLI:
+## Skills
 
-```sh
-npx skills add honeyvid/skills
-```
+- **honeyvid**: connect, check credits, quote, create, wait, download, and handle errors.
+- **honeyvid-viral-template**: put a person, pet or character into a trending template.
+- **honeyvid-video-generation**: pick a Playground video model, write the prompt, and use frames, references or source video.
+- **honeyvid-image-generation**: generate or edit images within each model's reference limits and settings.
+- **honeyvid-batch**: make several variants within a total credit budget and report the spend.
 
-- **honeyvid** — Connect, check credits, quote, create, wait, download, and handle errors.
-- **honeyvid-viral-template** — Put a person, pet, or character into a trending template.
-- **honeyvid-video-generation** — Choose a Playground video model, write a prompt, and use frames, references, or source video.
-- **honeyvid-image-generation** — Generate or edit images with model-specific reference limits and settings.
-- **honeyvid-batch** — Make several variants within a total credit budget and report the spend.
+Model access and prices come from the live account. Each skill links its references only where needed.
 
-Connect an MCP client to `https://honeyvid.ai/mcp`, or run `npx honeyvid login`. Skills supply instructions; connecting the account supplies tool access. Model access and prices come from the live account. Read each skill's linked references only when needed.
+## Contributing
+
+This repository is the source of the HoneyVid skills; pull requests are welcome. `node scripts/check.mjs` validates every skill (CI runs it too). The `honeyvid` npm package bundles these skills at a pinned commit, so a merged change reaches `npx honeyvid skills install` with the next CLI release.
