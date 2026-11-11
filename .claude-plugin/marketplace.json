@@ -1,0 +1,11 @@
+{
+  "name": "honeyvid",
+  "owner": { "name": "Beundra AB" },
+  "plugins": [
+    {
+      "name": "honeyvid",
+      "source": "./",
+      "description": "HoneyVid MCP server plus skills for viral template videos, Playground video and image generation, and batches."
+    }
+  ]
+}
