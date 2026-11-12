@@ -34,6 +34,7 @@ Then connect your account: add `https://honeyvid.ai/mcp` to your agent, or run `
 - **honeyvid-video-generation**: pick a Playground video model, write the prompt, and use frames, references or source video.
 - **honeyvid-image-generation**: generate or edit images within each model's reference limits and settings.
 - **honeyvid-batch**: make several variants within a total credit budget and report the spend.
+- **honeyvid-video-editing**: cut, combine, trim, reorder and mute your HoneyVid videos in the editor while you watch live, then export the MP4.
 
 Model access and prices come from the live account. Each skill links its references only where needed.
 
