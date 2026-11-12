@@ -45,6 +45,7 @@ When the balance is too low, return the quote, shortfall, and `top_up_url` from 
 - On wait timeout, keep the job ID and resume waiting on it. Never create a replacement just because waiting stopped.
 - Share `account_url` as the main result link (`job.accountUrl` in CLI output). It opens the saved result in the user’s HoneyVid account after sign-in and does not expire.
 - Use temporary `video_url` or `image_urls` only for previews and downloads. Call the status tool again for fresh media URLs when needed; their expiry does not delete the saved result. Keep job IDs for later retrieval.
+- For an MCP download, fetch the returned media URL as bytes, for example `curl --fail --location "$IMAGE_URL" --output ./result.png` using an entry from `image_urls`. Use the returned format’s extension. `account_url` opens the app; it is not a file download. If the media URL expired, call `honeyvid_get_video` for a fresh URL without generating or paying again.
 - Give the user the account link, local path if saved, job ID, and credits charged. Claim visual checks only if you inspected the output.
 
 ## Tool and command cheat sheet
