@@ -57,7 +57,7 @@ npx honeyvid create --template '<template-id>' --character '<character-id>' \
 ```
 
 - Wait with `honeyvid_get_video {job_id:"<id>", wait_seconds:45}`. Honor `retry_after_seconds` between calls. Or resume with `npx honeyvid video '<id>' --wait --output ./milo-dance.mp4`.
-- Give the user `video_url`, the job ID, credits charged, and the local path if downloaded. Inspect the clip when possible for character, motion, and framing; report only checks actually performed.
+- Give the user `account_url` as the main result link (`job.accountUrl` in CLI output), the job ID, credits charged, and the local path if downloaded. The account link opens the saved video after sign-in and does not expire. Use temporary `video_url` for previews and downloads; expiry does not delete the saved video. Inspect the clip when possible for character, motion, and framing; report only checks actually performed.
 
 ## Spend and recovery rules
 
