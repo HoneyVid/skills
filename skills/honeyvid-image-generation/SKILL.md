@@ -64,8 +64,10 @@ Repeated `--set key=value` parses numeric and boolean values as those types. Out
 
 - Use `honeyvid_get_video {job_id:"<id>",wait_seconds:45}` for image jobs too. Honor `retry_after_seconds`; read all `image_urls` when complete.
 - CLI: `npx honeyvid videos --kind image`, then `npx honeyvid video '<id>' --wait --output ./product-shot.png`. Preserve the actual paths reported for multiple images. Match file extensions to returned formats; naming a JPEG `.png` does not convert it.
-- Download each result. Compare the returned count with the requested count; report any shortfall rather than inventing missing images. Requery status to refresh expired private URLs.
-- Return links, paths if saved, model, job ID, and actual charged credits. Check balance for refunds before reporting net spend. Say whether you inspected text, identity, framing, or edits.
+- Share `account_url` as the main result link (`job.accountUrl` in CLI output). It opens the saved image in the user’s HoneyVid account after sign-in and does not expire.
+- Use `image_urls` for previews and downloads. Compare the returned count with the requested count; report any shortfall rather than inventing missing images. Requery status to refresh temporary media URLs; expiry does not delete the saved image.
+- For an MCP download, fetch the returned media URL as bytes, for example `curl --fail --location "$IMAGE_URL" --output ./result.png` using an entry from `image_urls`. Use the returned format’s extension. `account_url` opens the app; it is not a file download. If the media URL expired, call `honeyvid_get_video` for a fresh URL without generating or paying again.
+- Return the account link, paths if saved, model, job ID, and actual charged credits. Check balance for refunds before reporting net spend. Say whether you inspected text, identity, framing, or edits.
 
 ## Spend and recovery
 

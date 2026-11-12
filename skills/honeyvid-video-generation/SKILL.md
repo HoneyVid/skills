@@ -66,7 +66,7 @@ Use repeated `--set key=value`; numeric and boolean values are parsed as such. F
 ## Finish and recover
 
 - Wait with `honeyvid_get_video {job_id:"<id>",wait_seconds:45}` and honor `retry_after_seconds`; CLI `--wait` handles waiting. Resume a timeout with `npx honeyvid video '<id>' --wait`.
-- Save the returned video URL or use `--output ./name.mp4`. Refresh private links with the status tool when expired. Return the job ID, link, local path if saved, and actual credits charged.
+- Share `account_url` as the main result link (`job.accountUrl` in CLI output). It opens the saved video in the user’s HoneyVid account after sign-in and does not expire. Use `video_url` for previews and downloads, or `--output ./name.mp4`. Refresh temporary media URLs with the status tool; expiry does not delete the saved video. Return the job ID, account link, local path if saved, and actual credits charged.
 - Inspect character, action, camera, framing, and start/end continuity when possible. Say which checks you actually performed.
 - Reuse the same key and unchanged inputs after an uncertain submission. Never launch a duplicate because waiting timed out. Failed videos are refunded; a confirmed failed Playground replacement is a new quoted job with a new key, within the remaining budget.
 - Honor the shared 30-agent-jobs/hour limit and 429 retry timing. On price-cap rejection, requote or lower settings; never raise the budget silently. On low balance, return `top_up_url` from `honeyvid_get_account` / `topUpUrl` from `npx honeyvid account`. On Playground 404 or missing tools, stop unsupported generation.

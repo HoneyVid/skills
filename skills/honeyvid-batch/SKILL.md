@@ -50,7 +50,7 @@ Use the quoted credits as the per-job ceiling when they fit. Include all active 
 
 ## Download and review
 
-Use names such as `01-studio-front.mp4` or `02-warm-light.png`. Preserve real extensions and the CLI's reported multi-image paths. Never overwrite another variant. Save every returned `image_urls` entry or the `video_url`; refresh expired private links with `honeyvid_get_video`. Recover older image jobs with `honeyvid_list_videos {kind:"image"}` / `npx honeyvid videos --kind image`.
+Use names such as `01-studio-front.mp4` or `02-warm-light.png`. Preserve real extensions and the CLI's reported multi-image paths. Never overwrite another variant. Download every returned `image_urls` entry or the `video_url`; refresh temporary media links with `honeyvid_get_video`. Expiry does not delete saved account results. Recover older image jobs with `honeyvid_list_videos {kind:"image"}` / `npx honeyvid videos --kind image`.
 
 Check which variants completed, which are still running, and how many outputs each returned. Inspect results when possible. Rank only on criteria actually reviewed, such as readable text, subject identity, framing, or the requested motion. Label unchecked outputs clearly.
 
@@ -64,4 +64,4 @@ Return a compact table using real values:
 
 State the authorized budget, gross charged/reserved credits, confirmed refunds, net spend, and remaining budget. Do not count an expected refund until confirmed. Separate running jobs from completed outputs. Flag missing images and partial refunds. Never report quotes as actual spend; if a refund cannot be verified, report gross charges and mark net spend unconfirmed.
 
-Give the best inspected result first, then the other links and any unfinished work. Do not spend the leftover budget on unrequested variants.
+Use `account_url` as each variant’s result link (`job.accountUrl` in CLI output). These links open saved results in the user’s HoneyVid account after sign-in and do not expire; keep temporary media URLs for previews and downloads. Give the best inspected result first, then the other account links and any unfinished work. Do not spend the leftover budget on unrequested variants.
