@@ -11,7 +11,7 @@ Use connected HoneyVid MCP tools; otherwise run `npx honeyvid`. Connect at `http
 
 1. Search with `honeyvid_search_templates` using `query`, `category`, and a small `limit`. CLI: `npx honeyvid templates --search dance --limit 10`.
 2. Match the user's vibe, action, and desired duration. Open full details with `honeyvid_get_template {template_id}` or `npx honeyvid template '<id>'`. Use the returned preview, `durationSeconds`, available qualities, and picks. Only generate an available template; do not treat an unvalidated sample as a paid option.
-3. For pets, choose a returned model/pick that supports animals and fits the clip length. Do not assume every human dance template works for a pet. Use SCAIL-2 only where it is offered; its clip cap is 10 seconds.
+3. For pets, choose a returned model/pick that supports animals and fits the clip length. Do not assume every human dance template works for a pet. Read each pick's model and length limits in the template details.
 4. Reuse a suitable saved character from `honeyvid_list_characters` / `npx honeyvid characters`. Otherwise add the user's photo:
 
 ```text
@@ -40,7 +40,7 @@ npx honeyvid quote --template '<id>' --quality standard
 npx honeyvid quote --template '<id>' --quality high
 ```
 
-Compare credits and estimated time. Favor the requested quality; otherwise use Standard within the authorized budget. Check balance with `honeyvid_get_account` / `npx honeyvid account`. If the user chose a returned `pick`, include that exact pick in both MCP quote and create. CLI template commands have no pick flag; use the offered quality rather than inventing one.
+Compare credits and estimated time. Favor the requested quality; otherwise use Standard within the authorized budget. Check balance with `honeyvid_get_account` / `npx honeyvid account`. If the user chose a returned `pick`, include that exact pick in both quote and create: MCP `pick`, CLI `--pick '<pick>'`. Never invent one.
 
 The core flow picks a template, character, and quality. Playground model IDs are a separate interface; never pass them as template pick IDs. Do not promise the template's source motion or sound was preserved until you inspect the result.
 
@@ -61,6 +61,6 @@ npx honeyvid create --template '<template-id>' --character '<character-id>' \
 
 ## Spend and recovery rules
 
-Quote before every new paid attempt. Never exceed the user's budget. Reuse the same key and inputs after an uncertain submission; a new key can charge again. A wait timeout does not cancel the job. Failed videos are refunded automatically; check balance before replacing one. `honeyvid_retry_video` / `npx honeyvid retry '<id>' --max-credits <n> --idempotency-key '<new-retry-key>'` retries a confirmed failed template video once, with a new charge.
+Quote before every new paid attempt. Never exceed the user's budget. Reuse the same key and inputs after an uncertain submission; a new key can charge again. A wait timeout does not cancel the job. Failed videos are refunded automatically; check balance before replacing one. `honeyvid_retry_video` / `npx honeyvid retry '<id>' --max-credits <n> --idempotency-key '<new-retry-key>'` retries a confirmed failed template video with a new charge; add `pick` / `--pick` to switch to another returned pick. Repeating the same job and choice never charges twice.
 
 Agents share 30 jobs per rolling hour, including retries and upscales. Honor 429 retry timing. If balance is too low, return the account's `top_up_url` / CLI `topUpUrl`; do not buy credits. Reconnect on auth failure. Stop on unavailable templates or missing access instead of bypassing them. Refresh expired private links with `honeyvid_get_video`.

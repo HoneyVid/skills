@@ -19,15 +19,16 @@ Use connected MCP tools first. The editor works on finished HoneyVid results the
 
 ### Tool and command pairs
 
-| MCP tool | Purpose |
-| --- | --- |
-| `honeyvid_editor_list` | List the user's edit projects. |
-| `honeyvid_editor_create` | New project from `name`, optional `video_ids` / `source_keys`. CLI: `npx honeyvid edit create`. |
-| `honeyvid_editor_get` | Timeline, `version`, and clip/track summary. Read before every batch. |
-| `honeyvid_editor_apply` | Apply 1–50 ops atomically with `base_version` and `note`. |
-| `honeyvid_editor_notify` | Show a short progress message in the open editor. |
+| MCP tool | CLI (`npx honeyvid`, 0.3.4+) | Purpose |
+| --- | --- | --- |
+| `honeyvid_editor_list` | `edit list` | List the user's edit projects. |
+| `honeyvid_editor_create` | `edit create --name '<name>' [--video '<job-id>'] [--source '<key>']` | New project from `name`, optional videos or source keys, appended in order. |
+| `honeyvid_editor_get` | `edit show '<id>'` | Timeline, `version`, and clip/track summary. Read before every batch. |
+| `honeyvid_editor_apply` | `edit apply '<id>' --base-version <n> --note '<text>' --ops '<json>'` | Apply 1–50 ops atomically. `--ops` also takes `@file` or `-` for stdin. |
+| `honeyvid_editor_notify` | `edit note '<id>' '<message>' [--tone info\|success\|error]` | Show a short progress message in the open editor. |
+| — | `edit open '<id>'` | Print the watch URL and open it in a browser. |
 
-Reading needs the `videos:read` scope; creating, applying, and notifying need `videos:create`. If the CLI lacks an `edit` subcommand you need, check `npx honeyvid edit --help`; otherwise use the MCP tools.
+Reading needs the `videos:read` scope; creating, applying, and notifying need `videos:create`.
 
 ## Plan the edit
 

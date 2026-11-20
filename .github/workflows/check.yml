@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  # Catches HoneyVid model changes that the references have not caught up with.
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: read
