@@ -20,7 +20,8 @@ Use connected HoneyVid MCP tools first. Otherwise use `npx honeyvid` (Node.js 20
 ## Choose the workflow
 
 - Trending clip + one character photo: use **honeyvid-viral-template**.
-- A new shot, start/end frames, references, or source-video edits: use **honeyvid-video-generation**.
+- A new shot, start/end frames, references, source-video swaps, or upscaling: use **honeyvid-video-generation**.
+- Cutting, combining, trimming, or muting finished videos in the editor: use **honeyvid-video-editing**.
 - Still images, photo edits, or style references: use **honeyvid-image-generation**.
 - Several outputs under one spending cap: use **honeyvid-batch**.
 
