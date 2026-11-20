@@ -5,7 +5,7 @@
     {
       "name": "honeyvid",
       "source": "./",
-      "description": "HoneyVid MCP server plus skills for viral template videos, Playground video and image generation, and batches."
+      "description": "HoneyVid MCP server plus skills for viral template videos, Playground video and image generation, batches, and video editing."
     }
   ]
 }
