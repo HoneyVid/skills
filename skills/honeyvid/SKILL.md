@@ -21,6 +21,7 @@ Use connected HoneyVid MCP tools first. Otherwise use `npx honeyvid` (Node.js 20
 
 - Trending clip + one character photo: use **honeyvid-viral-template**.
 - A new shot, start/end frames, references, source-video swaps, or upscaling: use **honeyvid-video-generation**.
+- Upscaling a finished video, or animating a generated image: use **honeyvid-video-generation**.
 - Cutting, combining, trimming, or muting finished videos in the editor: use **honeyvid-video-editing**.
 - Still images, photo edits, or style references: use **honeyvid-image-generation**.
 - Several outputs under one spending cap: use **honeyvid-batch**.
@@ -34,7 +35,7 @@ Use connected HoneyVid MCP tools first. Otherwise use `npx honeyvid` (Node.js 20
 5. Save a unique `idempotency_key` before submitting. Use 8–100 letters, digits, underscores, or hyphens. Reuse the same key **and identical inputs** after a network error, server error, or uncertain submission. A new key may create another paid job.
 6. Save the returned job ID and actual charge. Agents share a limit of **30 jobs per rolling hour per user**, across clients, retries, and upscales. Idempotent replays reuse the job.
 
-Failed videos receive an automatic credit refund. Check job status and the current balance before planning a replacement. Do not treat a slow job or a client timeout as failure.
+Failed videos receive an automatic credit refund. A job that has not started can be stopped with `honeyvid_cancel_video` for a full refund. Older results: pass `before` (a result's `createdAt`) to `honeyvid_list_videos`. Check job status and the current balance before planning a replacement. Do not treat a slow job or a client timeout as failure.
 
 When the balance is too low, return the quote, shortfall, and `top_up_url` from `honeyvid_get_account` (`topUpUrl` from CLI `account`). Use `https://honeyvid.ai/pricing` if needed. Let the user buy credits; never buy them or change a plan without instruction. A rate limit or access error does not call for a top-up.
 
@@ -69,6 +70,11 @@ All CLI commands below start with `npx honeyvid`.
 | `honeyvid_generate_image` | `generate image --model '<id>' --prompt '<text>' --max-credits <n> --idempotency-key '<key>'` |
 | `honeyvid_get_video` | `video '<job-id>' [--wait] [--output ./result.mp4]` |
 | `honeyvid_list_videos` | `videos --kind image` (MCP: `kind:'image'`; use `video` for videos) |
+| `honeyvid_quote_upscale` | `upscale '<job-id>' --dry-run` |
+| `honeyvid_upscale_video` | `upscale '<job-id>' --upscaler '<id>' --target 4k --max-credits <n> --idempotency-key '<key>'` |
+| `honeyvid_save_image_as_character` | `characters from-image '<image-job-id>' --index 0` |
+| `honeyvid_list_uploads` | `uploads` |
+| `honeyvid_cancel_video` | `cancel '<job-id>'` |
 | `honeyvid_retry_video` | `retry '<failed-job-id>' --max-credits <n> --idempotency-key '<retry-key>' [--model '<id>' \| --pick '<pick>']` |
 
 Choose one value wherever the table uses `|`: run `generate video` or `generate image`, not the literal pipe notation. For a CLI quote without an authorized spending budget, use `--max-credits 0 --dry-run`; this creates no job.
