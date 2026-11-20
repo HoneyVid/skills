@@ -60,15 +60,15 @@ All CLI commands below start with `npx honeyvid`.
 | `honeyvid_list_characters` | `characters` |
 | `honeyvid_add_character` | `characters add --url '<https-url>' --name '<name>'` or `characters add ./photo.jpg --name '<name>'` |
 | `honeyvid_upload_video` | `upload ./source.mp4` (MCP takes `video_url`) |
-| `honeyvid_quote_video` | `quote --template '<id>' --quality standard` (or `--upload '<id>'`) |
-| `honeyvid_create_video` | `create --template '<id>' --character '<id>' --quality standard --max-credits <n> --idempotency-key '<key>'` |
+| `honeyvid_quote_video` | `quote --template '<id>' --quality standard [--pick '<pick>']` (or `--upload '<id>'`) |
+| `honeyvid_create_video` | `create --template '<id>' --character '<id>' --quality standard [--pick '<pick>'] --max-credits <n> --idempotency-key '<key>'` |
 | `honeyvid_list_models` | `models [--kind video\|image] [--model '<id>']` |
 | `honeyvid_quote_generation` | `generate video\|image --model '<id>' --prompt '<text>' --max-credits <n> --dry-run` plus all intended inputs/settings |
 | `honeyvid_generate_video` | `generate video --model '<id>' --prompt '<text>' --max-credits <n> --idempotency-key '<key>'` |
 | `honeyvid_generate_image` | `generate image --model '<id>' --prompt '<text>' --max-credits <n> --idempotency-key '<key>'` |
 | `honeyvid_get_video` | `video '<job-id>' [--wait] [--output ./result.mp4]` |
 | `honeyvid_list_videos` | `videos --kind image` (MCP: `kind:'image'`; use `video` for videos) |
-| `honeyvid_retry_video` | `retry '<failed-job-id>' --max-credits <n> --idempotency-key '<retry-key>'` |
+| `honeyvid_retry_video` | `retry '<failed-job-id>' --max-credits <n> --idempotency-key '<retry-key>' [--model '<id>' \| --pick '<pick>']` |
 
 Choose one value wherever the table uses `|`: run `generate video` or `generate image`, not the literal pipe notation. For a CLI quote without an authorized spending budget, use `--max-credits 0 --dry-run`; this creates no job.
 
@@ -89,6 +89,6 @@ For Playground, map MCP `settings` to repeated `--set key=value`. Values that lo
 | CLI exit 7 | Job still runs; resume `video '<id>' --wait`. |
 | Failed job / CLI exit 6 | Read the reason and balance. A replacement costs credits; quote and keep it within budget. |
 
-Use `honeyvid_retry_video` only for a failed template/upload video. Do not assume it handles Playground jobs. For a confirmed failed Playground job, submit a quoted replacement with a new key only within the authorized budget.
+`honeyvid_retry_video` reruns any confirmed failed job (template, upload, Playground video, image or upscale) with its saved inputs. To switch models, pass `pick` for a template or upload job, or `model` for a Playground, image or upscale job; quote that model first and pass the price as `max_credits`. Repeating the same job and choice never charges twice.
 
 CLI automation: use `--json`, read `{ok:true,data:...}` or `{ok:false,error:...}`, and parse stdout only. Progress goes to stderr. Read `npx honeyvid schema` or command `--help` if a deployed version differs; stop if required tools are missing.

@@ -31,7 +31,7 @@ Then connect your account: add `https://honeyvid.ai/mcp` to your agent, or run `
 
 - **honeyvid**: connect, check credits, quote, create, wait, download, and handle errors.
 - **honeyvid-viral-template**: put a person, pet or character into a trending template.
-- **honeyvid-video-generation**: pick a Playground video model, write the prompt, and use frames, references or source video.
+- **honeyvid-video-generation**: pick a Playground video model, write the prompt, use frames, references or source video, and upscale.
 - **honeyvid-image-generation**: generate or edit images within each model's reference limits and settings.
 - **honeyvid-batch**: make several variants within a total credit budget and report the spend.
 
@@ -39,4 +39,4 @@ Model access and prices come from the live account. Each skill links its referen
 
 ## Contributing
 
-This repository is the source of the HoneyVid skills; pull requests are welcome. `node scripts/check.mjs` validates every skill (CI runs it too). The `honeyvid` npm package bundles these skills at a pinned commit, so a merged change reaches `npx honeyvid skills install` with the next CLI release.
+This repository is the source of the HoneyVid skills; pull requests are welcome. `node scripts/check.mjs` validates every skill and checks that the model references list exactly the models live on honeyvid.ai (CI runs it on every PR and each Monday). The `honeyvid` npm package bundles these skills at a pinned commit, so a merged change reaches `npx honeyvid skills install` with the next CLI release.

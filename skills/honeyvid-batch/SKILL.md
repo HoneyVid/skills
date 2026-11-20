@@ -16,7 +16,7 @@ Use connected MCP tools first; otherwise use `npx honeyvid`. Connect at `https:/
 5. Quote **each distinct request** with `honeyvid_quote_generation` or `honeyvid_quote_video`. CLI: `generate video|image ... --max-credits <cap> --dry-run`, or `quote --template '<id>' --quality standard`. Choose one of `video` or `image`, not the literal pipe notation.
 6. Sum quotes before launching. If the plan exceeds budget, reduce count, duration, resolution, or another priced option, then requote. Keep the user's priorities; do not silently change the subject or intended result.
 
-For several image variants with the same prompt/settings, use `num_images` 1–4 if the model offers it. FLUX and Recraft support one output per job. Quote the requested count. Different prompts or settings need separate requests.
+For several image variants with the same prompt/settings, use `num_images` 1–4 if the model offers it. Models without `num_images` make one output per job. Quote the requested count. Different prompts or settings need separate requests.
 
 ## Track every request
 
